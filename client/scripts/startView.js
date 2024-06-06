@@ -1,12 +1,14 @@
 //import functions (socket?)
-import saveUserName from "./saveUserName.js";
+import saveUserName from './saveUserName.js';
+import createColoringView from './createColoringView.js';
 
 
 
 export default function startView() {
-    //
+    
     const startViewContainer = document.createElement('div');
-    startViewContainer.classList.add('main-container');
+    startViewContainer.classList.add('start-view-container');
+    startViewContainer.setAttribute('id', 'startViewContainer');
 
 
     const pageTitle = document.createElement('h1');
@@ -53,12 +55,10 @@ export default function startView() {
     letsColorBtn.addEventListener('click', () => {
 
         saveUserName();
-        //startViewContainer.innerHTML = ''; replace with hidden content
-
-        
-
-           //  coloringView();     assignColor();
-    })
+        createColoringView();
+ 
+        //assignColor();
+    });
 };
 
 
