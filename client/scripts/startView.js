@@ -1,5 +1,5 @@
 //import functions (socket?)
-
+import saveUserName from "./saveUserName.js";
 
 
 
@@ -16,18 +16,15 @@ export default function startView() {
     const userNameForm = document.createElement('form');
     userNameForm.id = 'userNameForm';
 
-
     const userNameLabel = document.createElement('label');
     userNameLabel.htmlFor = 'inputField';
     userNameLabel.textContent = 'Enter username';
-
 
     const userNameInput = document.createElement('input');
     userNameInput.type = 'text';
     userNameInput.id = 'userNameInput';
     userNameInput.name = 'userNameInput';
     userNameInput.required = true;
-
 
     const letsColorBtn = document.createElement('button');
     letsColorBtn.type = 'submit';
@@ -44,27 +41,23 @@ export default function startView() {
     userNameForm.appendChild(letsColorBtn);
 
 
-
-
     userNameInput.addEventListener('input', () => {
         if (userNameInput.value.trim() === '') {
-           
             letsColorBtn.disabled = true;
-
-
         } else {
-
-
             letsColorBtn.disabled = false;
         }
     });
 
 
     letsColorBtn.addEventListener('click', () => {
-        startViewContainer.innerHTML = '';
 
+        saveUserName();
+        //startViewContainer.innerHTML = ''; replace with hidden content
 
-            //coloringView();   saveUserName();     assignColor();
+        
+
+           //  coloringView();     assignColor();
     })
 };
 
