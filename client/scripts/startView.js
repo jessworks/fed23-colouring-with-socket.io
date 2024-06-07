@@ -29,7 +29,7 @@ export default function startView() {
     userNameInput.required = true;
 
     const letsColorBtn = document.createElement('button');
-    letsColorBtn.type = 'submit';
+    letsColorBtn.type = 'button';
     letsColorBtn.id = 'letsColorBtn';
     letsColorBtn.disabled = true;
     letsColorBtn.textContent = `Let's color!`;

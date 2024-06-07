@@ -1,12 +1,9 @@
 //import referencegrid,coloringGrid, chat, quitbtn
 
 export default function createColoringView() {
-
-    // DON'T: startViewContainer.innerHTML = ''; --> hide startViewContainer
-    /*
+    
     const startViewContainer = document.querySelector('#startViewContainer');
     startViewContainer.style.display = 'none';
-    */
     
     
     const coloringViewContainer = document.createElement('div');
