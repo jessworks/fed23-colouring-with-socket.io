@@ -6,6 +6,9 @@ import createColoringView from './createColoringView.js';
 
 export default function startView() {
     
+
+
+
     const startViewContainer = document.createElement('div');
     startViewContainer.classList.add('start-view-container');
     startViewContainer.setAttribute('id', 'startViewContainer');
@@ -42,7 +45,7 @@ export default function startView() {
     userNameForm.appendChild(userNameInput);
     userNameForm.appendChild(letsColorBtn);
 
-
+    
     userNameInput.addEventListener('input', () => {
         if (userNameInput.value.trim() === '') {
             letsColorBtn.disabled = true;
