@@ -1,4 +1,4 @@
-//import referencegrid,coloringGrid, chat, quitbtn
+import coloringGrid from "./coloringGrid";
 import createFinishedView from "./createFinishedView";
 
 export default function createColoringView() {
@@ -21,7 +21,7 @@ export default function createColoringView() {
     pageTest.innerText = 'Coloring view';
     coloringViewContainer.appendChild(pageTest);
 
-
+    coloringGrid();
 
     const stopColoringBtn = document.createElement('button');
     stopColoringBtn.classList.add('stop-coloring-btn');

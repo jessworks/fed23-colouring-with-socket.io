@@ -6,9 +6,6 @@ import createColoringView from './createColoringView.js';
 
 export default function startView() {
     
-
-
-
     const startViewContainer = document.createElement('div');
     startViewContainer.classList.add('start-view-container');
     startViewContainer.setAttribute('id', 'startViewContainer');
