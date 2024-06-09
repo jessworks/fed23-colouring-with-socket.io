@@ -1,14 +1,16 @@
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000"); 
+
 export default function coloringGrid() {
     // x coloringGridContainer
-    //15 x 15 grid
-    //clickable
-    //$name your color is $color --> name from ls, color from css --> assign in startView clickevt assignColor()
-    //add color when clicked
-    //'lock' when colored
-    //msg 'greatjob' when cells are full
-    //append coloringGridContainer to coloringViewContainer
-    //append coloringGrid items to coloringGridContainer
-    // Create the coloring grid container
+    // x 15 x 15 grid
+    // - clickable  --> solve colorAssigned on server side, it blocks the if/else which colours cells
+    // - $name your color is $color 
+    // - add color when clicked
+    // - msg 'greatjob' when cells are full
+    // x append coloringGridContainer to coloringViewContainer
+    // x append coloringGrid items to coloringGridContainer
+    // x create the coloring grid container
    
     const coloringGridContainer = document.createElement('div');
     coloringGridContainer.classList.add('coloring-grid-container');
@@ -18,31 +20,45 @@ export default function coloringGrid() {
     coloringViewContainer.appendChild(coloringGridContainer);
     
    
+    let userColors = {};
+    let assignedColor = null; // Store the color assigned to the current user
     
     
-    // Set a username in local storage (for demonstration purposes)
-    localStorage.setItem('username', 'user123');
-
-    // Define a function to get the color associated with the username
-    function getColorByUsername(username) {
-        const colors = {
-            'user123': 'lightblue',
-            'user456': 'lightgreen',
-            'user789': 'lightcoral',
-        };
-        return colors[username] || 'lightgray'; // Default color if username is not found
-    }
-
+    socket.on('colorAssigned', (color) => {
+        console.log(`Received colorAssigned event with color: ${color}`);
+        if (color) {
+            assignedColor = color;
+            alert(`Your color is ${color}`);
+        } else {
+            alert('No colors available, please try again later.');
+        }
+    });
+    
+    socket.on('updateUsers', (updatedUserColors) => {
+        userColors = updatedUserColors;
+        console.log('Updated users and their colors:', userColors);
+    });
+    
     // Create the grid
-
+    
     for (let i = 0; i < 225; i++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         cell.addEventListener('click', function() {
             const username = localStorage.getItem('username');
-            const color = getColorByUsername(username);
-            cell.style.backgroundColor = color;
+            console.log(`Click detected. Username: ${username}, Assigned color: ${assignedColor}`);
+            if (username && assignedColor) {
+                console.log('check: if');
+                cell.style.backgroundColor = assignedColor;
+                // Optionally, send the updated cell state to the server here
+                //const cellPosition = i; // Assuming i is the position of the cell in the grid
+                //socket.emit('updateCellState', { position: cellPosition, color: assignedColor });
+
+            } else {
+                alert('You need to set a username first.');
+            }
         });
         coloringGridContainer.appendChild(cell);
     }
 };
+  

@@ -1,5 +1,5 @@
 //import functions (socket?)
-import saveUserName from './saveUserName.js';
+import saveUsername from './saveUsername.js';
 import createColoringView from './createColoringView.js';
 
 
@@ -15,18 +15,18 @@ export default function startView() {
     pageTitle.innerText = 'Color With Friends';
 
 
-    const userNameForm = document.createElement('form');
-    userNameForm.id = 'userNameForm';
+    const usernameForm = document.createElement('form');
+    usernameForm.id = 'usernameForm';
 
-    const userNameLabel = document.createElement('label');
-    userNameLabel.htmlFor = 'inputField';
-    userNameLabel.textContent = 'Enter username';
+    const usernameLabel = document.createElement('label');
+    usernameLabel.htmlFor = 'inputField';
+    usernameLabel.textContent = 'Enter username';
 
-    const userNameInput = document.createElement('input');
-    userNameInput.type = 'text';
-    userNameInput.id = 'userNameInput';
-    userNameInput.name = 'userNameInput';
-    userNameInput.required = true;
+    const usernameInput = document.createElement('input');
+    usernameInput.type = 'text';
+    usernameInput.id = 'usernameInput';
+    usernameInput.name = 'usernameInput';
+    usernameInput.required = true;
 
     const letsColorBtn = document.createElement('button');
     letsColorBtn.type = 'button';
@@ -37,14 +37,14 @@ export default function startView() {
 
     document.body.append(startViewContainer);
     startViewContainer.append(pageTitle);
-    startViewContainer.append(userNameForm);
-    userNameForm.appendChild(userNameLabel);
-    userNameForm.appendChild(userNameInput);
-    userNameForm.appendChild(letsColorBtn);
+    startViewContainer.append(usernameForm);
+    usernameForm.appendChild(usernameLabel);
+    usernameForm.appendChild(usernameInput);
+    usernameForm.appendChild(letsColorBtn);
 
     
-    userNameInput.addEventListener('input', () => {
-        if (userNameInput.value.trim() === '') {
+    usernameInput.addEventListener('input', () => {
+        if (usernameInput.value.trim() === '') {
             letsColorBtn.disabled = true;
         } else {
             letsColorBtn.disabled = false;
@@ -54,7 +54,7 @@ export default function startView() {
 
     letsColorBtn.addEventListener('click', () => {
 
-        saveUserName();
+        saveUsername();
         createColoringView();
  
         //assignColor();
