@@ -1,11 +1,15 @@
+import socket from './socket';
+
 export default function saveUser() {
     // check that element is in the DOM
-    const userNameInput = document.querySelector('#userNameInput');
-    if (userNameInput) {
-        const userName = userNameInput.value;
+    const usernameInput = document.querySelector('#usernameInput');
+    if (usernameInput) {
+        const username = usernameInput.value;
         // save username in localStorage
-        localStorage.setItem('name', userName);
+        localStorage.setItem('username', username);
+        socket.emit('setUsername', username);
+        console.log('emits from saveUsername: setUsername, username');
     } else {
-        console.error('#userNameInput element not found.');
+        console.error('errorMsg:', '#usernameInput element not found.');
     }
 }
