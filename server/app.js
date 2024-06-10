@@ -51,8 +51,10 @@ io.on('connection', (socket) => {
         }
     });
 
-     //current cell state when a new client connects    --> how ot make it work?
+     //current cell state when a new client connects    --> how to make it work?
     socket.emit('initialCellStates', cellStates);
+
+    //chatList
 });
 
 
