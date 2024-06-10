@@ -1,5 +1,4 @@
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3000");
+import socket from './socket';
 
 export default function saveUser() {
     // check that element is in the DOM

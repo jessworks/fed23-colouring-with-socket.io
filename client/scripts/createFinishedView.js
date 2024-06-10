@@ -18,6 +18,8 @@ export default function createFinishedView() {
 
     quitBtn.addEventListener('click', () => {
 
+        //localStorage.clear();
+
         const finishedViewContainer = document.querySelector('#finishedViewContainer');
         finishedViewContainer.style.display = 'none';
 

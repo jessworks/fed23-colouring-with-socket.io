@@ -11,6 +11,7 @@ const io = require("socket.io")(server, {
 const colors = ['lightblue', 'lightgreen', 'lightcoral', 'lightyellow'];
 const userColors = {}; // { username: color }
 const userSockets = {}; // { socketId: username }
+const cellStates = {}; // { position: color }
 
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
@@ -22,11 +23,8 @@ io.on('connection', (socket) => {
                 const assignedColor = availableColors[0];
                 userColors[username] = assignedColor;
                 userSockets[socket.id] = username;
-                console.log(`Assigning color: ${assignedColor} to username: ${username}`);
                 socket.emit('colorAssigned', assignedColor);
-                console.log('check: if colorAssigned');
                 io.emit('updateUsers', userColors);
-                console.log('check: updateUsers');
             } else {
                 socket.emit('colorAssigned', null); // No colors available
             }
@@ -34,6 +32,14 @@ io.on('connection', (socket) => {
             socket.emit('colorAssigned', userColors[username]);
         }
     });
+
+    socket.on('updateCellState', (data) => {
+        const { position, color } = data;
+        cellStates[position] = color;
+        io.emit('cellStateUpdated', data);
+    });
+
+   
 
     socket.on('disconnect', () => {
         console.log('A user disconnected:', socket.id);
@@ -44,6 +50,9 @@ io.on('connection', (socket) => {
             io.emit('updateUsers', userColors);
         }
     });
+
+     //current cell state when a new client connects    --> how ot make it work?
+    socket.emit('initialCellStates', cellStates);
 });
 
 
