@@ -40,9 +40,6 @@ io.on('connection', (socket) => {
     });
 
      
-
-   
-     //chatList
      socket.emit('chat', 'hello world');
      socket.on('chat', (arg) => {
         console.log('incoming chat', arg);

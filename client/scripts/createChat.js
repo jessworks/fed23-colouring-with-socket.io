@@ -2,6 +2,8 @@ import socket from './socket.js';
 
 
 export default function createChat() {
+    const coloringViewContainer = document.querySelector('#coloringViewContainer');
+
     const chatContainer = document.createElement('div');
     chatContainer.setAttribute('id', 'chatContainer');
 
@@ -28,7 +30,7 @@ export default function createChat() {
     chatList.setAttribute('id', 'chatList');
 
 
-    coloringViewContainer.append(chatContainer);
+    coloringViewContainer.appendChild(chatContainer);
     chatContainer.appendChild(chatForm);
     chatForm.appendChild(chatLabel);
     chatForm.appendChild(chatInput);
@@ -45,9 +47,11 @@ export default function createChat() {
     });
 
     // - connect chat to socket to show all sent msgs in all clients browsers
+    let username = localStorage.getItem('username');
+
     sendMsgBtn.addEventListener('click', () => {
         console.log('msg input', chatInput.value);
-        socket.emit('chat', chatInput.value);
+        socket.emit('chat', {message: chatInput.value, username: username});
     });
 
     socket.on('chat', (arg) => {
@@ -57,7 +61,7 @@ export default function createChat() {
 
     function updateChat(chat) {
         const chatMsg = document.createElement('li');
-        chatMsg.innerText = chat;
+        chatMsg.innerText = chat.username + ': ' + chat.message;
         chatList.appendChild(chatMsg);
     };
 };
