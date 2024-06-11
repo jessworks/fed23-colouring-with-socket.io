@@ -14,7 +14,6 @@ export default function coloringGrid() {
     let assignedColor = null;
     
     socket.on('colorAssigned', (color) => {
-        console.log(`Received colorAssigned event with color: ${color}`);
         if (color) {
             assignedColor = color;
             

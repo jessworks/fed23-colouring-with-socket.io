@@ -27,11 +27,6 @@ export default function createChat() {
     const chatList = document.createElement('ul');
     chatList.setAttribute('id', 'chatList');
 
-    //print mgs as they come
-    const chatMsgs = document.createElement('li');
-    chatMsgs.setAttribute('id', 'chatMsgs');
-
-
 
     coloringViewContainer.append(chatContainer);
     chatContainer.appendChild(chatForm);
@@ -39,8 +34,7 @@ export default function createChat() {
     chatForm.appendChild(chatInput);
     chatForm.appendChild(sendMsgBtn);
     chatContainer.appendChild(chatList);
-    chatList.appendChild(chatMsgs);
-
+   
     
     chatInput.addEventListener('input', () => {
         if (chatInput.value.trim() === '') {
@@ -52,7 +46,18 @@ export default function createChat() {
 
     // - connect chat to socket to show all sent msgs in all clients browsers
     sendMsgBtn.addEventListener('click', () => {
-        //print msg, connect through socket
-
+        console.log('msg input', chatInput.value);
+        socket.emit('chat', chatInput.value);
     });
+
+    socket.on('chat', (arg) => {
+        console.log('socket', arg);
+        updateChat(arg);
+    });
+
+    function updateChat(chat) {
+        const chatMsg = document.createElement('li');
+        chatMsg.innerText = chat;
+        chatList.appendChild(chatMsg);
+    };
 };

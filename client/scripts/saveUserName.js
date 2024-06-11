@@ -8,7 +8,6 @@ export default function saveUser() {
         // save username in localStorage
         localStorage.setItem('username', username);
         socket.emit('setUsername', username);
-        console.log('emits from saveUsername: setUsername, username');
     } else {
         console.error('errorMsg:', '#usernameInput element not found.');
     }
