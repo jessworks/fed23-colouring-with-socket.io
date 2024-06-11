@@ -56,8 +56,6 @@ export default function startView() {
 
         saveUsername();
         createColoringView();
- 
-        //assignColor();
     });
 };
 

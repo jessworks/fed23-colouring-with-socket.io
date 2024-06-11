@@ -14,14 +14,13 @@ export default function coloringGrid() {
     let assignedColor = null;
     
     socket.on('colorAssigned', (color) => {
-        console.log(`Received colorAssigned event with color: ${color}`);
         if (color) {
             assignedColor = color;
             
             const username = localStorage.getItem('username');
             const yourColorMsg = document.createElement('p');
             yourColorMsg.setAttribute('id', 'yourColorMsg');
-            yourColorMsg.innerText = (`${username}: ${assignedColor}`);
+            yourColorMsg.innerText = (`${username}, you are ${assignedColor}`);
             coloringGridContainer.appendChild(yourColorMsg);
         } else {
             alert('No colors available, please try again later.');

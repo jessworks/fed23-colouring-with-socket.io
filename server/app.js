@@ -39,7 +39,13 @@ io.on('connection', (socket) => {
         io.emit('cellStateUpdated', data);
     });
 
-   
+     
+     socket.emit('chat', 'hello world');
+     socket.on('chat', (arg) => {
+        console.log('incoming chat', arg);
+        io.emit('chat', arg);
+     });
+
 
     socket.on('disconnect', () => {
         console.log('A user disconnected:', socket.id);
@@ -50,9 +56,8 @@ io.on('connection', (socket) => {
             io.emit('updateUsers', userColors);
         }
     });
-
-     //current cell state when a new client connects    --> how ot make it work?
-    socket.emit('initialCellStates', cellStates);
+   //current cell state when a new client connects    --> how to make it work?
+   socket.emit('initialCellStates', cellStates);
 });
 
 
