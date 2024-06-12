@@ -4,8 +4,12 @@ import createFinishedView from "./createFinishedView";
 
 export default function createColoringView() {
 
-    //referenceGrid()
-    //chat()
+    const existingColoringGrid = document.querySelector('#coloringGridContainer');
+    if (existingColoringGrid) {
+        existingColoringGrid.remove();
+    }
+
+    //referenceGrid()?
     
     const startViewContainer = document.querySelector('#startViewContainer');
     startViewContainer.style.display = 'none';
@@ -14,6 +18,10 @@ export default function createColoringView() {
     coloringViewContainer.classList.add('coloring-view-container');
     coloringViewContainer.setAttribute('id', 'coloringViewContainer');
     document.body.appendChild(coloringViewContainer);
+
+    const coloring = document.createElement('h1');
+    coloring.innerText = 'coloring';
+    coloringViewContainer.appendChild(coloring);
 
     
     coloringGrid();
@@ -27,6 +35,9 @@ export default function createColoringView() {
     coloringViewContainer.appendChild(stopColoringBtn);
 
     stopColoringBtn.addEventListener('click', () => {
+
+        const coloringViewContainer = document.querySelector('#coloringViewContainer');
+        coloringViewContainer.style.display = 'none';
 
         createFinishedView();
     });

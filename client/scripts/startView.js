@@ -5,6 +5,11 @@ import createColoringView from './createColoringView.js';
 
 
 export default function startView() {
+
+    const existingStartView = document.querySelector('#startViewContainer');
+    if (existingStartView) {
+        existingStartView.remove();
+    }
     
     const startViewContainer = document.createElement('div');
     startViewContainer.classList.add('start-view-container');

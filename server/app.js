@@ -13,7 +13,7 @@ const userColors = {}; // { username: color }
 const userSockets = {}; // { socketId: username }
 const cellStates = {}; // { position: color }
 
-io.on('connection', (socket) => {
+io.on('connection', (socket) => {           //duplicates emits for each round --> how do i stop it
     console.log('A user connected:', socket.id);
 
     socket.on('setUsername', (username) => {
@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
                 socket.emit('colorAssigned', assignedColor);
                 io.emit('updateUsers', userColors);
             } else {
-                socket.emit('colorAssigned', null); // No colors available
+                socket.emit('colorAssigned', null);
             }
         } else {
             socket.emit('colorAssigned', userColors[username]);
@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
     });
 
      
-     socket.emit('chat', 'hello world');
+     //socket.emit('chat', 'hello world');
      socket.on('chat', (arg) => {
         console.log('incoming chat', arg);
         io.emit('chat', arg);
@@ -56,6 +56,7 @@ io.on('connection', (socket) => {
             io.emit('updateUsers', userColors);
         }
     });
+
    //current cell state when a new client connects    --> how to make it work?
    socket.emit('initialCellStates', cellStates);
 });

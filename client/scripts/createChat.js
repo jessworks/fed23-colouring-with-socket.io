@@ -2,6 +2,12 @@ import socket from './socket.js';
 
 
 export default function createChat() {
+
+    const existingChatContainer = document.getElementById('chatContainer');
+    if (existingChatContainer) {
+        existingChatContainer.remove();
+    }
+
     const coloringViewContainer = document.querySelector('#coloringViewContainer');
 
     const chatContainer = document.createElement('div');
@@ -52,12 +58,22 @@ export default function createChat() {
     sendMsgBtn.addEventListener('click', () => {
         console.log('msg input', chatInput.value);
         socket.emit('chat', {message: chatInput.value, username: username});
+        chatInput.value = '';
     });
 
+    
     socket.on('chat', (arg) => {
         console.log('socket', arg);
         updateChat(arg);
     });
+    
+
+    /*socket.off('chat'); // Remove existing listeners to avoid duplication
+    socket.on('chat', (arg) => {
+        console.log('socket', arg);
+        updateChat(arg);
+    });
+    */
 
     function updateChat(chat) {
         const chatMsg = document.createElement('li');
